@@ -18,7 +18,7 @@
 #include <linux/switch.h>
 
 #define SUPPORT_FINGER_DATA_CHECKSUM 0x0F
-#define TS_WAKE_LOCK_TIMEOUT		(2 * HZ)
+#define TS_WAKE_LOCK_TIMEOUT		(2000)
 #define FRAME_COUNT 5
 
 #ifdef HX_RST_PIN_FUNC
@@ -1599,7 +1599,7 @@ void himax_ts_work(struct himax_ts_data *ts)
 #if defined(HX_SMART_WAKEUP)
 	else
 	{
-		wake_lock_timeout(&ts->ts_SMWP_wake_lock, TS_WAKE_LOCK_TIMEOUT);
+		__pm_wakeup_event(&ts->ts_SMWP_wake_lock, TS_WAKE_LOCK_TIMEOUT);
 		msleep(40);
 		himax_wake_check_func();
 	}
@@ -2018,7 +2018,7 @@ int himax_chip_common_probe(struct i2c_client *client, const struct i2c_device_i
 
 #ifdef HX_SMART_WAKEUP
 	ts->SMWP_enable=0;
-	wake_lock_init(&ts->ts_SMWP_wake_lock, WAKE_LOCK_SUSPEND, HIMAX_common_NAME);
+	wakeup_source_init(&ts->ts_SMWP_wake_lock, HIMAX_common_NAME);
 #endif
 #ifdef HX_HIGH_SENSE
 	ts->HSEN_enable=0;
@@ -2093,7 +2093,7 @@ err_ito_test_wq_failed:
 #endif
 #ifdef HX_RESEND_CMD
 err_resend_cmd_wq_failed:
-	wake_lock_destroy(&ts->himax_resend_cmd_wq);
+	wakeup_source_trash(&ts->himax_resend_cmd_wq);
 #endif
 #ifdef  HX_CHIP_STATUS_MONITOR
 	g_chip_monitor_data->HX_CHIP_MONITOR_EN = 0;
@@ -2169,7 +2169,7 @@ int himax_chip_common_remove(struct i2c_client *client)
 	input_unregister_device(ts->input_dev);
 
 #ifdef HX_SMART_WAKEUP
-		wake_lock_destroy(&ts->ts_SMWP_wake_lock);
+		wakeup_source_trash(&ts->ts_SMWP_wake_lock);
 #endif
 	kfree(ts);
 
