@@ -65,3 +65,7 @@
 	qcom,hsusb-otg-phy-init-seq = <0x33 0x80 0x33 0x81 0x23 0x82 0x30 0x83 0xffffffff>;
 	qcom,floated-charger-enable = <1>;
 };
+
+&apps_iommu {
+	qcom,no-aarch64;
+};
