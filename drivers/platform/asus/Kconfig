@@ -1,0 +1,34 @@
+# Asus configuration options
+
+config MACH_ASUS
+	bool "Asus devices"
+	help
+	  Support for Asus variants
+
+menu "Asus board selection"
+
+config MACH_ASUS_X00H
+        bool "X00H board"
+        select MACH_ASUS
+        help
+          Support for Asus Zenfone 4 Max X00H MSM8917
+
+config MACH_ASUS_X00I
+        bool "X00I board"
+        select MACH_ASUS
+        help
+          Support for Asus Zenfone 4 Max X00I MSM8937
+
+config MACH_ASUS_X00P
+        bool "X00P board"
+        select MACH_ASUS
+        help
+          Support for Asus Zenfone Max M1 X00P MSM8917/MSM8937
+
+config MACH_ASUS_X00R
+        bool "X00R board"
+        select MACH_ASUS
+        help
+          Support for Asus ZenFone Live L1 X00R MSM8917
+
+endmenu
