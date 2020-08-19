@@ -42,7 +42,7 @@ static const struct v4l2_subdev_internal_ops msm_sensor_init_internal_ops;
 static int msm_sensor_wait_for_probe_done(struct msm_sensor_init_t *s_init)
 {
 	int rc;
-	#ifdef CONFIG_MACH_ASUS_X00H
+	#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 	int tm = 15000;
 	#else
 	int tm = 10000;

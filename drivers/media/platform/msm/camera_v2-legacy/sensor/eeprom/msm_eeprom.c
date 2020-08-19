@@ -26,7 +26,7 @@ DEFINE_MSM_MUTEX(msm_eeprom_mutex);
 static struct v4l2_file_operations msm_eeprom_v4l2_subdev_fops;
 #endif
 
-#ifdef CONFIG_MACH_ASUS_X00H
+#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 extern bool IsHi556Mount;
 extern bool IsHi846Mount;
 #endif
@@ -320,7 +320,7 @@ ERROR:
 	return rc;
 }
 
-#ifdef CONFIG_MACH_ASUS_X00H
+#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 #ifdef CONFIG_HQ_HI556_OTP
 /**
   * hynix_sensor_init_for_otp - Hynix sensor read OTP data need init sensor earlyer
@@ -453,7 +453,7 @@ static int eeprom_parse_memory_map(struct msm_eeprom_ctrl_t *e_ctrl,
 	if (!e_ctrl->cal_data.mapdata)
 		return -ENOMEM;
 
-#ifdef CONFIG_MACH_ASUS_X00H
+#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 #ifdef CONFIG_HQ_HI556_OTP
 if (IsHi556Mount && !strcmp(e_ctrl->pdev->name,"1b0c000.qcom,cci:qcom,eeprom@1") ){
     CDBG("[eeprom]hi556 is mount\n");
@@ -552,7 +552,7 @@ if (IsHi846Mount && !strcmp(e_ctrl->pdev->name,"1b0c000.qcom,cci:qcom,eeprom@2")
 	memptr = e_ctrl->cal_data.mapdata;
 	for (i = 0; i < e_ctrl->cal_data.num_data; i++)
 		CDBG("memory_data[%d] = 0x%X\n", i, memptr[i]);
-#ifdef CONFIG_MACH_ASUS_X00H
+#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 #ifdef CONFIG_HQ_HI556_OTP
 success:
 #endif

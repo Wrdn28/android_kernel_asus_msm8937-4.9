@@ -592,7 +592,7 @@ static int32_t msm_flash_low(
 		if (flash_ctrl->flash_trigger[i])
 			led_trigger_event(flash_ctrl->flash_trigger[i], 0);
 
-		#ifdef CONFIG_MACH_ASUS_X00H
+		#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 		if (flash_ctrl->switch_trigger)
 			led_trigger_event(flash_ctrl->switch_trigger, 0);
 		#endif
@@ -634,7 +634,7 @@ static int32_t msm_flash_high(
 		if (flash_ctrl->torch_trigger[i])
 			led_trigger_event(flash_ctrl->torch_trigger[i], 0);
 
-		#ifdef CONFIG_MACH_ASUS_X00H
+		#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 		if (flash_ctrl->switch_trigger)
 			led_trigger_event(flash_ctrl->switch_trigger, 0);
 		#endif
@@ -667,7 +667,7 @@ static int32_t msm_flash_release(
 {
 	int32_t rc = 0;
 
-	#ifdef CONFIG_MACH_ASUS_X00H
+	#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 	CDBG("\n[flash]Enter\n");
 	if (flash_ctrl->flash_state == MSM_CAMERA_FLASH_RELEASE) {
 		pr_err("%s:%d Invalid flash state = %d",

@@ -48,7 +48,7 @@ struct msm_eeprom_ctrl_t {
 	uint8_t is_supported;
 };
 
-#ifdef CONFIG_MACH_ASUS_X00H
+#if defined(CONFIG_MACH_ASUS_X00H) || defined(CONFIG_MACH_ASUS_X00I)
 #ifdef CONFIG_HQ_HI556_OTP
 struct msm_camera_i2c_reg_array hi556_readotp_init_regval[] = {
 	{0x0a00, 0x0000, 0x0000}, //stream off
