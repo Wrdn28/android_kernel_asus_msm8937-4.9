@@ -67,7 +67,7 @@
 	};
 };
 
-&pmi8950_charger {
+&qpnp_smbcharger {
 	/delete-property/ qcom,parallel-usb-min-current-ma;
 	/delete-property/ qcom,parallel-usb-9v-min-current-ma;
 	/delete-property/ qcom,parallel-allowed-lowering-ma;
@@ -85,7 +85,7 @@
 	qcom,thermal-mitigation = <2000 1500 1000 800>; //<1500 700 600 0>;
 };
 
-&pmi8950_fg {
+&qpnp_fg {
 	qcom,resume-soc = <98>;
 	qcom,fg-iterm-ma = <200>; //<150>
 	qcom,fg-chg-iterm-ma = <150>; //<100>
@@ -148,7 +148,7 @@
 	/delete-property/ qcom,misc-trim-error-rc19p2-clk-reg-present;
 
 	status = "ok";
-	qcom,actuator-type = "erm";
+	qcom,actuator-type = <1>;
 	qcom,wave-play-rate-us = <5263>;
 	qcom,vmax-mv = <3000>;
 };
