@@ -56,17 +56,6 @@
 	};
 };
 
-&pmi_haptic {
-	/delete-property/ qcom,actuator-type;
-	/delete-property/ qcom,lra-auto-res-mode;
-	/delete-property/ qcom,lra-high-z;
-	/delete-property/ qcom,lra-res-cal-period;
-
-	status = "ok";
-	qcom,actuator-type = "erm";
-	qcom,wave-play-rate-us = <5263>;
-};
-
 &mdss_dsi0 {
 	qcom,dsi-pref-prim-pan = <&dsi_ili9881c_fhd_vid>;
 	qcom,regulator-ldo-mode;
