@@ -15,7 +15,6 @@
 
 #include "himax_common.h"
 #include "himax_ic.h"
-#include <linux/switch.h>
 
 #define SUPPORT_FINGER_DATA_CHECKSUM 0x0F
 #define TS_WAKE_LOCK_TIMEOUT		(2000)
@@ -39,7 +38,6 @@ extern void HX_report_ESD_event(void);
 struct himax_ts_data *private_ts;
 struct himax_ic_data *ic_data;
 struct himax_report_data *hx_touch_data;
-static struct switch_dev switch_fw_version;
 
 static int		HX_TOUCH_INFO_POINT_CNT   = 0;
 
@@ -1772,14 +1770,6 @@ static void himax_ts_diag_work_func(struct work_struct *work)
 }
 #endif
 
-static ssize_t switch_fw_version_read(struct switch_dev *sdev, char *buf)
-{
-    s32 ret = -1;
-    ret += sprintf(buf, "%s_FW:%#x_CFG:%#x_SensorId:%#x\n", HIMAX_common_NAME,
-		ic_data->vendor_fw_ver, ic_data->vendor_config_ver, ic_data->vendor_sensor_id);
-    return ret;
-}
-
 int himax_chip_common_probe(struct i2c_client *client, const struct i2c_device_id *id)
 {
 	int ret = 0, err = 0;
@@ -2056,14 +2046,6 @@ int himax_chip_common_probe(struct i2c_client *client, const struct i2c_device_i
 #if defined(CONFIG_TOUCHSCREEN_HIMAX_DEBUG_X00H)
 	himax_touch_proc_init();
 #endif
-
-switch_fw_version.name = "touch";
-switch_fw_version.print_name = switch_fw_version_read;
-ret = switch_dev_register(&switch_fw_version);
-if(ret < 0)
-{
-	E("Register switch device error.");
-}
 
 #if defined( HX_USB_DETECT_CALLBACK)
 	if (ts->cable_config)		
